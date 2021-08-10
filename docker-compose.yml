@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  laravel-app:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - app-network
+
+  mysql-app:
+    image: migs/mysql-5.7:latest
+    ports:
+      - "3006:3306"
+    volumes:
+      - ./docker/dbdata:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: laravel
+    networks:
+      - app-network
+
+  phpmyadmin-app:
+    image: phpmyadmin/phpmyadmin:latest
+    links:
+      - mysql-app
+    ports:
+      - 8090:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+      
