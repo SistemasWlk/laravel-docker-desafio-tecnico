@@ -1,39 +1,39 @@
 version: '3'
 
 services:
-  laravel-app:
+  laravel-app-desafio-tecnico:
     build: .
     ports:
       - "8080:80"
     volumes:
-      - ./:/var/www/html
+      - ./:/var/www/html/laravel-docker-desafio-tecnico/
     networks:
-      - app-network
+      - app-network-desafio-tecnico
 
-  mysql-app:
+  mysql-app-desafio-tecnico:
     image: migs/mysql-5.7:latest
     ports:
       - "3006:3306"
     volumes:
       - ./docker/dbdata:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: laravel
+      MYSQL_DATABASE: desafiotecnico
+      MYSQL_ROOT_PASSWORD: 
     networks:
-      - app-network
+      - app-network-desafio-tecnico
 
-  phpmyadmin-app:
+  phpmyadmin-app-desafio-tecnico:
     image: phpmyadmin/phpmyadmin:latest
     links:
-      - mysql-app
+      - mysql-app-desafio-tecnico
     ports:
       - 8090:80
     environment:
       - PMA_ARBITRARY=1
     networks:
-      - app-network
+      - app-network-desafio-tecnico
 
 networks:
-  app-network:
+  app-network-desafio-tecnico:
     driver: bridge
-      
+
