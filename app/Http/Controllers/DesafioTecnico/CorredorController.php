@@ -7,6 +7,91 @@ use App\Http\Controllers\Controller;
 
 class CorredorController extends Controller
 {
+
+    /**
+     * @var integer
+     */
+    private $iCodigo;
+
+    /**
+     * @var string
+     */
+    private $sNome;
+
+    /**
+     * @var string
+     */
+    private $sCpf;
+
+    /**
+     * @var date
+     */
+    private $dDataNascimento;
+
+    /**
+     * @return int
+     */
+    public function getCodigo() 
+    {
+        return $this->iCodigo;
+    }
+
+    /**
+     * @param int $iCodigo
+     */
+    public function setCodigo($iCodigo) 
+    {
+        $this->iCodigo = $iCodigo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNome() 
+    {
+        return $this->sNome;
+    }
+
+    /**
+     * @param string $sNome
+     */
+    public function setNome($sNome) 
+    {
+        $this->sNome = $sNome;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCpf() 
+    {
+        return $this->sCpf;
+    }
+
+    /**
+     * @param string $sCpf
+     */
+    public function setCpf($sCpf) 
+    {
+        $this->sCpf = $sCpf;
+    }
+
+    /**
+     * @return date
+     */
+    public function getDataNascimento() 
+    {
+        return $this->dDataNascimento;
+    }
+
+    /**
+     * @param date $dDataNascimento
+     */
+    public function setDataNascimento($dDataNascimento) 
+    {
+        $this->dDataNascimento = $dDataNascimento;
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('corredores',               'DesafioTecnico\CorredorController');
+Route::resource('provas',                   'DesafioTecnico\ProvaController');
+Route::resource('corredoresProvas',         'DesafioTecnico\CorredorProvaController');
+Route::resource('resultadosCorredores',     'DesafioTecnico\ResultadoCorredorController');
+Route::resource('tipoProva',                'DesafioTecnico\TipoProvaController');
