@@ -14,7 +14,7 @@ class TipoProvaController extends Controller
      */
     public function index()
     {
-        //
+        return view('site.tipo_prova.tipo_prova', ['current' => 'tipoprova']);
     }
 
     /**

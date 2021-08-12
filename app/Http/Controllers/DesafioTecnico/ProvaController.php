@@ -14,7 +14,7 @@ class ProvaController extends Controller
      */
     public function index()
     {
-        //
+        return view('site.prova.prova', ['current' => 'prova']);
     }
 
     /**

@@ -14,7 +14,7 @@ class ResultadoCorredorController extends Controller
      */
     public function index()
     {
-        //
+        return view('site.resultado_corredor.resultado_corredor', ['current' => 'resultadocorrida']);
     }
 
     /**

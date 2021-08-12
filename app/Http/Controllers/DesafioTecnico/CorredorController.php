@@ -99,7 +99,7 @@ class CorredorController extends Controller
      */
     public function index()
     {
-        //
+        return view('site.corredor.corredor', ['current' => 'corredor']);
     }
 
     /**

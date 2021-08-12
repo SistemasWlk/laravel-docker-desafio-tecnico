@@ -14,7 +14,7 @@ class CorredorProvaController extends Controller
      */
     public function index()
     {
-        //
+        return view('site.corredor_prova.corredor_prova', ['current' => 'corrida']);
     }
 
     /**
