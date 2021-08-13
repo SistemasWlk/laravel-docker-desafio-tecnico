@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\ResultadoCorredor;
 use App\Prova;
 use App\Corredor;
+use App\CorredorProva;
 
 class ResultadoCorredorController extends Controller
 {
@@ -57,9 +58,23 @@ class ResultadoCorredorController extends Controller
      */
     public function create()
     {
-        $current            = 'resultadocorrida';
-        $oListaProvas       = Prova::join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')->get();
-        $oListaCorredores   = Corredor::all();
+        $current = 'resultadocorrida';
+        $oListaCorredores = CorredorProva::select('corredors.id', 'corredors.nome')
+            ->join('corredors', 'corredor_provas.id_corredor',  '=', 'corredors.id')
+            ->join('provas', 'corredor_provas.id_prova',        '=', 'provas.id')
+            ->join('tipo_provas', 'provas.id_tp_prova',         '=', 'tipo_provas.id')
+            ->distinct()
+            ->get();
+
+        $oListaProvas = CorredorProva::select('provas.id', 'tipo_provas.quilometragem')
+            ->join('corredors', 'corredor_provas.id_corredor',  '=', 'corredors.id')
+            ->join('provas', 'corredor_provas.id_prova',        '=', 'provas.id')
+            ->join('tipo_provas', 'provas.id_tp_prova',         '=', 'tipo_provas.id')
+            ->distinct()
+            ->where('corredors.id', '=', $oListaCorredores[0]->id)
+            ->get();
+
+        // $oListaProvas       = Prova::join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')->get();
         return view('site.resultado_corredor.novoresultadocorredor', compact('oListaProvas', 'oListaCorredores', 'current'));
     }
 
@@ -139,6 +154,25 @@ class ResultadoCorredorController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showJson($id)
+    {
+        $oListaProvas = CorredorProva::select('provas.id', 'tipo_provas.quilometragem')
+            ->join('corredors', 'corredor_provas.id_corredor',  '=', 'corredors.id')
+            ->join('provas', 'corredor_provas.id_prova',        '=', 'provas.id')
+            ->join('tipo_provas', 'provas.id_tp_prova',         '=', 'tipo_provas.id')
+            ->distinct()
+            ->where('corredors.id', '=', $id)
+            ->get();
+
+        return json_encode($oListaProvas);
     }
 
     /**

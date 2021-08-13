@@ -22,9 +22,10 @@ class CorredorProvaController extends Controller
     public function index()
     {
         $current         = 'corrida';
-        $oCorredorProvas = CorredorProva::join('corredors', 'corredor_provas.id_corredor', '=', 'corredors.id')
-            ->join('provas', 'corredor_provas.id_prova', '=', 'provas.id')
-            ->join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')
+        $oCorredorProvas = CorredorProva::select('corredor_provas.id', 'corredors.nome', 'tipo_provas.quilometragem', 'provas.data')
+            ->join('corredors', 'corredor_provas.id_corredor',  '=', 'corredors.id')
+            ->join('provas', 'corredor_provas.id_prova',        '=', 'provas.id')
+            ->join('tipo_provas', 'provas.id_tp_prova',         '=', 'tipo_provas.id')
             ->get();
 
         $sMsgErro = $this->sMsgErro;
@@ -39,9 +40,11 @@ class CorredorProvaController extends Controller
      */
     public function create()
     {
-        $current            = 'corrida';
-        $oListaProvas       = Prova::join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')->get();
-        $oListaCorredores   = Corredor::all();
+        $current      = 'corrida';
+        $oListaProvas = Prova::select('provas.id', 'tipo_provas.quilometragem')
+            ->join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')
+            ->get();
+        $oListaCorredores = Corredor::all();
 
         $sMsgErro = $this->sMsgErro;
 
@@ -57,13 +60,38 @@ class CorredorProvaController extends Controller
     public function store(Request $request)
     {
         $current     = 'corrida';
+        $sMsgErro    = '';
         $id_corredor = $request->input('id_corredor');
         $id_prova    = $request->input('id_prova');
 
-        $oListaCorredores   = Corredor::where('idade', '<', 18)->get();
+        $oCorredore     = Corredor::where('id', '=', $id_corredor)->get();
+        $oProvaCorredor = Prova::select('provas.*', 'quilometragem')
+            ->join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')
+            ->orderby('provas.id')
+            ->where('provas.id', '=', $id_prova)
+            ->get();
+        $oListaProvasCorredors  = CorredorProva::select('corredor_provas.id', 'corredors.nome', 'tipo_provas.quilometragem', 'provas.data')
+            ->join('corredors', 'corredor_provas.id_corredor',  '=', 'corredors.id')
+            ->join('provas', 'corredor_provas.id_prova',        '=', 'provas.id')
+            ->join('tipo_provas', 'provas.id_tp_prova',         '=', 'tipo_provas.id')
+            ->where('corredors.id', '=', $id_corredor)
+            ->get();
 
-        if (count($oListaCorredores) > 0) {
+        foreach ($oListaProvasCorredors as $key => $oListaProvasCorredor) {
+            if ($oProvaCorredor[0]->data == $oListaProvasCorredor->data) {
+                $sMsgErro = "Participante já inscrito em uma prova na data $oListaProvasCorredor->data !";
+                break;
+            }
+        }
+
+        if (count($oCorredore) == 0) {
+            $this->sMsgErro = "Corredor não encontrado!";
+            return $this->create(); 
+        }elseif($oCorredore[0]->idade < 18){
             $this->sMsgErro = "Não é permitida a inscrição de menores de idade!";
+            return $this->create(); 
+        }elseif($sMsgErro != ''){
+            $this->sMsgErro = $sMsgErro;
             return $this->create(); 
         }else{
             CorredorProva::insert([

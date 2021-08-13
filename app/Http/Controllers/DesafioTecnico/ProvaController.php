@@ -18,7 +18,10 @@ class ProvaController extends Controller
     public function index()
     {
         $current = 'prova';
-        $oProvas = Prova::join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')->get();
+        $oProvas = Prova::select('provas.*', 'quilometragem')
+            ->join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')
+            ->orderby('provas.id')
+            ->get();
         return view('site.prova.prova', compact('oProvas', 'current'));
         //return view('site.prova.prova', ['current' => 'prova']);
     }
@@ -55,8 +58,7 @@ class ProvaController extends Controller
             ],
         ]);
 
-        $oProvas = Prova::join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')->get();
-        return view('site.prova.prova', compact('oProvas', 'current'));
+        return $this->index();
     }
 
     /**

@@ -11,26 +11,12 @@
         <div class="span12">          
           <div class="widget ">
             <div class="widget-header">
-              <h3>Cadastro de Participação na Corrida</h3>
+              <h3>Cadastro de Resutados das Corridas</h3>
             </div>
             <div class="widget-content">
             <form action="/resultadocorredor" method="POST">
                 {!! csrf_field() !!}
                 <div class="fields">
-                    <div class="field">
-                        <label for="id_prova">Prova</label>
-                        @if(count($oListaProvas) > 0) 
-                        <select name="id_prova" id="id_prova">
-                            @foreach($oListaProvas as $oListaProva)
-                            <option value="{{$oListaProva->id}}">{{$oListaProva->quilometragem}} Km</option>
-                            @endforeach 
-                        </select>
-                        @else
-                        <select name="id_prova" id="id_prova">
-                            <option value="">Nenhum</option>
-                        </select>
-                        @endif
-                    </div>
                     <div class="field">
                         <label for="id_corredor">Corredor</label>
                         @if(count($oListaCorredores) > 0) 
@@ -41,6 +27,20 @@
                         </select>
                         @else
                         <select name="id_corredor" id="id_corredor">
+                            <option value="">Nenhum</option>
+                        </select>
+                        @endif
+                    </div>
+                    <div class="field">
+                        <label for="id_prova">Prova</label>
+                        @if(count($oListaProvas) > 0) 
+                        <select name="id_prova" id="id_prova">
+                            @foreach($oListaProvas as $oListaProva)
+                            <option value="{{$oListaProva->id}}">{{$oListaProva->quilometragem}} Km</option>
+                            @endforeach 
+                        </select>
+                        @else
+                        <select name="id_prova" id="id_prova">
                             <option value="">Nenhum</option>
                         </select>
                         @endif
@@ -74,6 +74,13 @@
 
 @section('javascript')
 <script>
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        }
+    });
+
     $("#salvacorredorprova").click(function(){
         if ( $('#id_corredor').val() == "" ) {
             alert("Campo corredor obrigatório!"); 
@@ -99,7 +106,24 @@
         }else{
             $('form').submit();
         }
-    });    
+    });  
+
+    $("#id_corredor").change(function(){
+        var select = document.getElementById("id_prova");
+        while (select.length) {
+            select.remove(0);
+        }
+        $.getJSON("/api/resultadocorredor/" + this.value, function(data) { 
+            for(i=0;i<data.length;i++) {
+                //console.log(data);
+                select.options[select.options.length]= new Option(data[i].quilometragem+' Km', data[i].id );
+                // opcao = '<option value ="' + data[i].id + '">' + data[i].quilometragem + '</option>';
+                // this.append(opcao);
+            }
+        });
+
+
+    });  
 
 </script>
 @endsection
