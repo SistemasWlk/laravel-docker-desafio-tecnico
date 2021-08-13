@@ -20,25 +20,36 @@ class ResultadoCorredorController extends Controller
     public function index()
     {
         $current                  = 'resultadocorrida';
-        $oResultadoCorredorsList = ResultadoCorredor::join('corredors', 'resultado_corredors.id_corredor', '=', 'corredors.id')
+        $oResultadoCorredorsList = ResultadoCorredor::select('resultado_corredors.id', 'id_prova', 'nome', 'idade', 'hora_inicial', 'hora_final',  'provas.data', 'quilometragem', 'tempo')
+            ->join('corredors', 'resultado_corredors.id_corredor', '=', 'corredors.id')
             ->join('provas', 'resultado_corredors.id_prova', '=', 'provas.id')
             ->join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')
-            ->orderby('tempo')
+            ->orderby('provas.data', 'quilometragem', 'tempo')
             ->get();
         // echo "<pre>";
         // var_dump($oResultadoCorredorsLista);
         // echo "</pre>";
 
         $oResultadoCorredors = array();
-        $iPosicao = 1;
+        $iPosicao   = 1;
+        $dData      = null;
+        $iProva     = null;
 
         foreach ($oResultadoCorredorsList as $key => $oResultadoCorredor) {
+            if ($dData != $oResultadoCorredor->data) {
+                $dData    = $oResultadoCorredor->data;
+                $iPosicao = 1;
+            }elseif($iProva != $oResultadoCorredor->quilometragem){
+                $dData  = $oResultadoCorredor->quilometragem;
+                $iProva = 1;                
+            }
             $oResultadoCorredorsLista = new \stdClass;
             $oResultadoCorredorsLista->id = $oResultadoCorredor->id;
             $oResultadoCorredorsLista->id_prova = $oResultadoCorredor->id_prova;
             $oResultadoCorredorsLista->quilometragem = $oResultadoCorredor->quilometragem;
             $oResultadoCorredorsLista->nome = $oResultadoCorredor->nome;
             $oResultadoCorredorsLista->idade = $oResultadoCorredor->idade;
+            $oResultadoCorredorsLista->data = $oResultadoCorredor->data;
             $oResultadoCorredorsLista->hora_inicial = $oResultadoCorredor->hora_inicial;
             $oResultadoCorredorsLista->hora_final = $oResultadoCorredor->hora_final;
             $oResultadoCorredorsLista->tempo = $this->diffTime($oResultadoCorredor->hora_inicial, $oResultadoCorredor->hora_final);
@@ -46,8 +57,10 @@ class ResultadoCorredorController extends Controller
             $oResultadoCorredors[] = $oResultadoCorredorsLista;
             $iPosicao++;
         }
+
+        $sOrderBy = 'geral';
             
-        return view('site.resultado_corredor.resultado_corredor', compact('oResultadoCorredors', 'current'));
+        return view('site.resultado_corredor.resultado_corredor', compact('oResultadoCorredors', 'current', 'sOrderBy'));
         // return view('site.resultado_corredor.resultado_corredor', ['current' => 'resultadocorrida']);
     }
 
@@ -184,7 +197,8 @@ class ResultadoCorredorController extends Controller
     public function orderByIdade()
     {
         $current                  = 'resultadocorrida';
-        $oResultadoCorredorsList = ResultadoCorredor::join('corredors', 'resultado_corredors.id_corredor', '=', 'corredors.id')
+        $oResultadoCorredorsList = ResultadoCorredor::select('resultado_corredors.id', 'id_prova', 'nome', 'idade', 'hora_inicial', 'hora_final',  'provas.data', 'quilometragem', 'tempo')
+            ->join('corredors', 'resultado_corredors.id_corredor', '=', 'corredors.id')
             ->join('provas', 'resultado_corredors.id_prova', '=', 'provas.id')
             ->join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')
             ->orderby('idade')
@@ -203,6 +217,7 @@ class ResultadoCorredorController extends Controller
             $oResultadoCorredorsLista->quilometragem = $oResultadoCorredor->quilometragem;
             $oResultadoCorredorsLista->nome = $oResultadoCorredor->nome;
             $oResultadoCorredorsLista->idade = $oResultadoCorredor->idade;
+            $oResultadoCorredorsLista->data = $oResultadoCorredor->data;
             $oResultadoCorredorsLista->hora_inicial = $oResultadoCorredor->hora_inicial;
             $oResultadoCorredorsLista->hora_final = $oResultadoCorredor->hora_final;
             $oResultadoCorredorsLista->tempo = $this->diffTime($oResultadoCorredor->hora_inicial, $oResultadoCorredor->hora_final);
@@ -210,8 +225,10 @@ class ResultadoCorredorController extends Controller
             $oResultadoCorredors[] = $oResultadoCorredorsLista;
             $iPosicao++;
         }
+
+        $sOrderBy = 'idade';
             
-        return view('site.resultado_corredor.resultado_corredor', compact('oResultadoCorredors', 'current'));
+        return view('site.resultado_corredor.resultado_corredor', compact('oResultadoCorredors', 'current', 'sOrderBy'));
     }
 
 

@@ -41,7 +41,7 @@ class CorredorProvaController extends Controller
     public function create()
     {
         $current      = 'corrida';
-        $oListaProvas = Prova::select('provas.id', 'tipo_provas.quilometragem')
+        $oListaProvas = Prova::select('provas.id', 'tipo_provas.quilometragem', 'data')
             ->join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')
             ->get();
         $oListaCorredores = Corredor::all();

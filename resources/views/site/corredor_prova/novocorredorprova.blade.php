@@ -42,7 +42,7 @@
                             @if(count($oListaProvas) > 0) 
                             <select name="id_prova" id="id_prova">
                                 @foreach($oListaProvas as $oListaProva)
-                                <option value="{{$oListaProva->id}}">{{$oListaProva->quilometragem}} Km</option>
+                                <option value="{{$oListaProva->id}}">{{$oListaProva->quilometragem}} Km - {{implode('/',array_reverse(explode("-",$oListaProva->data)))}}</option>
                                 @endforeach 
                             </select>
                             @else

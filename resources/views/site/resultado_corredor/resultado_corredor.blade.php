@@ -16,9 +16,22 @@
             <div class="widget-content"> 
                 <div class="fields">
                     <div class="field" align="right">
-                        <strong>Ordernar:</strong>
-                        <li style="display: inline-block; border-bottom: 1px solid black;"><a href="/resultadocorredor" style="text-decoration: none">Geral</a></li>
-                        <li style="display: inline-block; border-bottom: 1px solid black;"><a href="/resultadocorredororderbyid" style="text-decoration: none">Idade</a></li>
+                        <strong>Ordernar:&nbsp;&nbsp;</strong>
+                        <li style="display: inline-block">
+                            @if($sOrderBy == 'geral')
+                            Geral
+                            @else
+                            <a href="/resultadocorredor" style="text-decoration: none">Geral</a>
+                            @endif
+                        </li>
+                        &nbsp;&nbsp;
+                        <li style="display: inline-block">
+                            @if($sOrderBy == 'idade')
+                            Idade
+                            @else
+                            <a href="/resultadocorredororderbyid" style="text-decoration: none">Idade</a>
+                            @endif
+                        </li>
                     </div> <!-- /field -->
                 </div> 
             @if(count($oResultadoCorredors) > 0) 
@@ -30,6 +43,7 @@
                             <th>Corredor</th>
                             <th>Tipo da Prova</th>
                             <th>Idade</th>
+                            <th>Data</th>
                             <th>Hora Incial</th>
                             <th>Hora Final</th>
                             <th>Tempo</th>
@@ -44,6 +58,7 @@
                             <td>{{$oResultadoCorredor->nome}}</td>
                             <td>{{$oResultadoCorredor->quilometragem}} KM</td>
                             <td>{{$oResultadoCorredor->idade}}</td>
+                            <td>{{implode('/',array_reverse(explode("-",$oResultadoCorredor->data)))}}</td>
                             <td>{{$oResultadoCorredor->hora_inicial}}</td>
                             <td>{{$oResultadoCorredor->hora_final}}</td>
                             <td>{{$oResultadoCorredor->tempo}}</td>
