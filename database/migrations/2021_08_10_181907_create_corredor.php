@@ -13,10 +13,11 @@ class CreateCorredor extends Migration
      */
     public function up()
     {
-        Schema::create('corredor', function (Blueprint $table) {
+        Schema::create('corredors', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome', 190)->nullable(false);
             $table->string('cpf', 11)->nullable(false)->unique();
+            $table->integer('idade')->nullable(false);
             $table->date('data_nascimento')->nullable(false);
         });
     }

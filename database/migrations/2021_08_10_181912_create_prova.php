@@ -13,11 +13,11 @@ class CreateProva extends Migration
      */
     public function up()
     {
-        Schema::create('prova', function (Blueprint $table) {
+        Schema::create('provas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_tp_prova')->nullable(false);
             $table->date('data')->nullable(false);
-            $table->foreign('id_tp_prova')->references('id')->on('tipo_prova');
+            $table->foreign('id_tp_prova')->references('id')->on('tipo_provas');
         });
     }
 

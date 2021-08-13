@@ -13,12 +13,12 @@ class CreateCorredorProva extends Migration
      */
     public function up()
     {
-        Schema::create('corredor_prova', function (Blueprint $table) {
+        Schema::create('corredor_provas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_corredor')->nullable(false);
             $table->unsignedBigInteger('id_prova')->nullable(false);
-            $table->foreign('id_corredor')->references('id')->on('corredor')->nullable(false);
-            $table->foreign('id_prova')->references('id')->on('prova')->nullable(false);
+            $table->foreign('id_corredor')->references('id')->on('corredors')->nullable(false);
+            $table->foreign('id_prova')->references('id')->on('provas')->nullable(false);
         });
     }
 

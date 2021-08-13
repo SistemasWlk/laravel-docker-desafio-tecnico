@@ -13,16 +13,15 @@ class CreateResultadoCorredor extends Migration
      */
     public function up()
     {
-        Schema::create('resultado_corredor', function (Blueprint $table) {
+        Schema::create('resultado_corredors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_prova');  
-            $table->unsignedBigInteger('id_tp_prova');    
+            $table->unsignedBigInteger('id_prova');     
             $table->unsignedBigInteger('id_corredor');  
             $table->time('hora_inicial', $precision = 0)->nullable(false);
             $table->time('hora_final', $precision = 0)->nullable(false);
-            $table->foreign('id_prova')->references('id')->on('prova')->nullable(false);
-            $table->foreign('id_tp_prova')->references('id')->on('tipo_prova')->nullable(false);
-            $table->foreign('id_corredor')->references('id')->on('corredor')->nullable(false);
+            $table->time('tempo', $precision = 0)->nullable(false);
+            $table->foreign('id_prova')->references('id')->on('provas')->nullable(false);
+            $table->foreign('id_corredor')->references('id')->on('corredors')->nullable(false);
         });
     }
 

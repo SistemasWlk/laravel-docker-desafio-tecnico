@@ -10,31 +10,43 @@
       <div class="row">
         <div class="span12">          
           <div class="widget ">
+            <div class="widget-header">
+              <h3>Corredor</h3>
+            </div>
             <div class="widget-content">
-                <h1>Corredor</h1>     
+            @if(count($oListaCorredores) > 0) 
                 <table class="table table-ordered table-hover">
                     <thead>
                         <tr>
                             <th>Código</th>
                             <th>Nome da Categoria</th>
-                            <th>Ações</th>
+                            <th>CPF</th>
+                            <th>Idade</th>
+                            <th>Data Nascimento</th>
+                            <!-- <th>Ações</th> -->
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($oListaCorredores as $oListaCorredore)
                         <tr>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>
+                            <td>{{$oListaCorredore->id}}</td>
+                            <td>{{$oListaCorredore->nome}}</td>
+                            <td>{{$oListaCorredore->cpf}}</td>
+                            <td>{{$oListaCorredore->idade}}</td>
+                            <td>{{$oListaCorredore->data_nascimento}}</td>
+<!--                             <td>
                                 <a href="" class="btn btn-sm btn-primary">Editar</a>
                                 <a href="" class="btn btn-sm btn-danger">Apagar</a>
-                            </td>
-                        </tr>          
+                            </td> -->
+                        </tr>
+                        @endforeach           
                     </tbody>
                 </table>
+            @endif  
             </div>
             <div class="card-footer">
                 <br />
-                <a href="/categorias/novo" class="btn btn-sm btn-primary" role="button">Novo Registro</a>
+                <a href="/corredor/create" class="btn btn-sm btn-primary" role="button">Novo Registro</a>
             </div>
           </div>
         </div>

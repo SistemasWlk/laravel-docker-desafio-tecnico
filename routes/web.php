@@ -17,6 +17,8 @@
 // });
 
 Route::get('/',                          'Site\SiteController@index')->name('principal'); 
+Route::get('resultadocorredororderbyid', 'DesafioTecnico\ResultadoCorredorController@orderByIdade')->name('orderbyidade'); 
+
 
 Route::resource('corredor',              'DesafioTecnico\CorredorController');
 Route::resource('prova',                 'DesafioTecnico\ProvaController');

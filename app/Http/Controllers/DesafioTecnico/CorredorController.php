@@ -5,93 +5,10 @@ namespace App\Http\Controllers\DesafioTecnico;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Corredor;
+
 class CorredorController extends Controller
 {
-
-    /**
-     * @var integer
-     */
-    private $iCodigo;
-
-    /**
-     * @var string
-     */
-    private $sNome;
-
-    /**
-     * @var string
-     */
-    private $sCpf;
-
-    /**
-     * @var date
-     */
-    private $dDataNascimento;
-
-    /**
-     * @return int
-     */
-    public function getCodigo() 
-    {
-        return $this->iCodigo;
-    }
-
-    /**
-     * @param int $iCodigo
-     */
-    public function setCodigo($iCodigo) 
-    {
-        $this->iCodigo = $iCodigo;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNome() 
-    {
-        return $this->sNome;
-    }
-
-    /**
-     * @param string $sNome
-     */
-    public function setNome($sNome) 
-    {
-        $this->sNome = $sNome;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCpf() 
-    {
-        return $this->sCpf;
-    }
-
-    /**
-     * @param string $sCpf
-     */
-    public function setCpf($sCpf) 
-    {
-        $this->sCpf = $sCpf;
-    }
-
-    /**
-     * @return date
-     */
-    public function getDataNascimento() 
-    {
-        return $this->dDataNascimento;
-    }
-
-    /**
-     * @param date $dDataNascimento
-     */
-    public function setDataNascimento($dDataNascimento) 
-    {
-        $this->dDataNascimento = $dDataNascimento;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -99,7 +16,9 @@ class CorredorController extends Controller
      */
     public function index()
     {
-        return view('site.corredor.corredor', ['current' => 'corredor']);
+        $current            = 'corredor';
+        $oListaCorredores   = Corredor::all();
+        return view('site.corredor.corredor', compact('oListaCorredores', 'current'));
     }
 
     /**
@@ -109,7 +28,7 @@ class CorredorController extends Controller
      */
     public function create()
     {
-        //
+        return view('site.corredor.novocorredor', ['current' => 'corredor']);
     }
 
     /**
@@ -120,7 +39,23 @@ class CorredorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $current         = 'corredor';
+        $nome            = $request->input('nome_corredor');
+        $cpf             = $request->input('cpf_corredor');
+        $data_nascimento = $request->input('dt_nascimento_corredor');
+        $idade           = $request->input('idade_corredor');
+
+        Corredor::insert([
+            [
+                'nome' => $nome, 
+                'cpf' => $cpf,
+                'data_nascimento' => $data_nascimento,
+                'idade' => $idade
+            ],
+        ]);
+
+        $oListaCorredores = Corredor::all();
+        return view('site.corredor.corredor', compact('oListaCorredores', 'current'));
     }
 
     /**

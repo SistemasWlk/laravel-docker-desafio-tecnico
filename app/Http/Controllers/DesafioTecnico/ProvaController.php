@@ -5,6 +5,9 @@ namespace App\Http\Controllers\DesafioTecnico;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Prova;
+use App\TipoProva;
+
 class ProvaController extends Controller
 {
     /**
@@ -14,7 +17,10 @@ class ProvaController extends Controller
      */
     public function index()
     {
-        return view('site.prova.prova', ['current' => 'prova']);
+        $current = 'prova';
+        $oProvas = Prova::join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')->get();
+        return view('site.prova.prova', compact('oProvas', 'current'));
+        //return view('site.prova.prova', ['current' => 'prova']);
     }
 
     /**
@@ -24,7 +30,10 @@ class ProvaController extends Controller
      */
     public function create()
     {
-        //
+
+        $current     = 'prova';
+        $oTipoProvas = TipoProva::all();
+        return view('site.prova.novoprova', compact('oTipoProvas', 'current'));
     }
 
     /**
@@ -35,7 +44,19 @@ class ProvaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $current     = 'prova';
+        $tipo_prova  = $request->input('tipo_prova');
+        $dt_prova    = $request->input('dt_prova');
+
+        Prova::insert([
+            [
+                'id_tp_prova' => $tipo_prova,
+                'data' => $dt_prova
+            ],
+        ]);
+
+        $oProvas = Prova::join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')->get();
+        return view('site.prova.prova', compact('oProvas', 'current'));
     }
 
     /**

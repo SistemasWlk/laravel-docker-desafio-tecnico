@@ -10,31 +10,37 @@
       <div class="row">
         <div class="span12">          
           <div class="widget ">
+            <div class="widget-header">
+                <h3>Tipo Prova</h3> 
+            </div>  
             <div class="widget-content">
-                <h1>Tipo Prova</h1>     
+            @if(count($oTipoProvas) > 0) 
                 <table class="table table-ordered table-hover">
                     <thead>
                         <tr>
                             <th>Código</th>
-                            <th>Nome da Categoria</th>
-                            <th>Ações</th>
+                            <th>Km</th>
+                            <!-- <th>Ações</th> -->
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($oTipoProvas as $oTipoProva)
                         <tr>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>
+                            <td>{{$oTipoProva->id}}</td>
+                            <td>{{$oTipoProva->quilometragem}} KM</td>
+<!--                             <td>
                                 <a href="" class="btn btn-sm btn-primary">Editar</a>
                                 <a href="" class="btn btn-sm btn-danger">Apagar</a>
-                            </td>
-                        </tr>          
+                            </td> -->
+                        </tr>
+                        @endforeach           
                     </tbody>
                 </table>
+            @endif  
             </div>
             <div class="card-footer">
                 <br />
-                <a href="/categorias/novo" class="btn btn-sm btn-primary" role="button">Novo Registro</a>
+                <a href="/tipoprova/create" class="btn btn-sm btn-primary" role="button">Novo Registro</a>
             </div>
         </div>
     </div>    

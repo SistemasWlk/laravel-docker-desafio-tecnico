@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Painel de Controle</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link href="{{asset('tema/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('tema/css/bootstrap-responsive.min.css')}}" rel="stylesheet">
@@ -29,5 +29,9 @@
     <script src="{{asset('tema/js/bootstrap.js')}}"></script>
     <script language="javascript" type="text/javascript" src="{{asset('tema/js/full-calendar/fullcalendar.min.js')}}"></script>
     <script src="{{asset('tema/js/base.js')}}"></script> 
+
+    @hasSection('javascript')
+        @yield('javascript')
+    @endif
 </body>
 </html>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\DesafioTecnico;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\TipoProva;
+
 class TipoProvaController extends Controller
 {
     /**
@@ -14,7 +16,9 @@ class TipoProvaController extends Controller
      */
     public function index()
     {
-        return view('site.tipo_prova.tipo_prova', ['current' => 'tipoprova']);
+        $current        = 'tipoprova';
+        $oTipoProvas    = TipoProva::all();
+        return view('site.tipo_prova.tipo_prova', compact('oTipoProvas', 'current'));   
     }
 
     /**
@@ -24,7 +28,7 @@ class TipoProvaController extends Controller
      */
     public function create()
     {
-        //
+        return view('site.tipo_prova.novotipoprova', ['current' => 'tipoprova']);
     }
 
     /**
@@ -35,7 +39,17 @@ class TipoProvaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $current         = 'tipoprova';
+        $tipo_corrida    = $request->input('tipo_corrida');
+
+        TipoProva::insert([
+            [
+                'quilometragem' => $tipo_corrida
+            ],
+        ]);
+
+        $oTipoProvas = TipoProva::all();
+        return view('site.tipo_prova.tipo_prova', compact('oTipoProvas', 'current'));  
     }
 
     /**

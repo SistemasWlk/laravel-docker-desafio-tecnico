@@ -13,7 +13,7 @@ class CreateTipoProva extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_prova', function (Blueprint $table) {
+        Schema::create('tipo_provas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->float('quilometragem', 8, 3)->nullable(false)->unique();
         });
