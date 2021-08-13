@@ -11,7 +11,7 @@
         <div class="span12">          
           <div class="widget ">
             <div class="widget-header">
-              <h3>Cadastro de Resutados das Corridas</h3>
+              <h3>Cadastro dos Resutados das Corridas</h3>
             </div>
             <div class="widget-content">
             <form action="/resultadocorredor" method="POST">
@@ -36,7 +36,7 @@
                         @if(count($oListaProvas) > 0) 
                         <select name="id_prova" id="id_prova">
                             @foreach($oListaProvas as $oListaProva)
-                            <option value="{{$oListaProva->id}}">{{$oListaProva->quilometragem}} Km</option>
+                            <option value="{{$oListaProva->id}}">{{$oListaProva->quilometragem}} Km - {{implode('/',array_reverse(explode("-",$oListaProva->data)))}}</option>
                             @endforeach 
                         </select>
                         @else

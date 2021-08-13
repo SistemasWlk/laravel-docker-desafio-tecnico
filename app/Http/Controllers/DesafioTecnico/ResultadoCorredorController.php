@@ -66,7 +66,7 @@ class ResultadoCorredorController extends Controller
             ->distinct()
             ->get();
 
-        $oListaProvas = CorredorProva::select('provas.id', 'tipo_provas.quilometragem')
+        $oListaProvas = CorredorProva::select('provas.id', 'tipo_provas.quilometragem', 'provas.data')
             ->join('corredors', 'corredor_provas.id_corredor',  '=', 'corredors.id')
             ->join('provas', 'corredor_provas.id_prova',        '=', 'provas.id')
             ->join('tipo_provas', 'provas.id_tp_prova',         '=', 'tipo_provas.id')
