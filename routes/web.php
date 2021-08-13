@@ -11,6 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     echo "okay";
+//     //return view('welcome');
+// });
+
+Route::get('/',                          'Site\SiteController@index')->name('principal'); 
+Route::get('resultadocorredororderbyid', 'DesafioTecnico\ResultadoCorredorController@orderByIdade')->name('orderbyidade'); 
+
+
+Route::resource('corredor',              'DesafioTecnico\CorredorController');
+Route::resource('prova',                 'DesafioTecnico\ProvaController');
+Route::resource('corredorprova',         'DesafioTecnico\CorredorProvaController');
+Route::resource('resultadocorredor',     'DesafioTecnico\ResultadoCorredorController');
+Route::resource('tipoprova',             'DesafioTecnico\TipoProvaController');
