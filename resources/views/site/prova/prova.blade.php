@@ -29,7 +29,7 @@
                         <tr>
                             <td>{{$oProva->id}}</td>
                             <td>{{$oProva->quilometragem}} KM</td>
-                            <td>{{$oProva->data}}</td>
+                            <td>{{implode('/',array_reverse(explode("-",$oProva->data)))}}</td>
 <!--                             <td>
                                 <a href="" class="btn btn-sm btn-primary">Editar</a>
                                 <a href="" class="btn btn-sm btn-danger">Apagar</a>

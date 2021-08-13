@@ -27,7 +27,8 @@ class CorredorProvaController extends Controller
             ->join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')
             ->get();
 
-        $sMsgErro = "";
+        $sMsgErro = $this->sMsgErro;
+
         return view('site.corredor_prova.corredor_prova', compact('oCorredorProvas', 'current', 'sMsgErro'));
     }
 
@@ -41,7 +42,9 @@ class CorredorProvaController extends Controller
         $current            = 'corrida';
         $oListaProvas       = Prova::join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')->get();
         $oListaCorredores   = Corredor::all();
-        $sMsgErro           = $this->sMsgErro;
+
+        $sMsgErro = $this->sMsgErro;
+
         return view('site.corredor_prova.novocorredorprova', compact('oListaProvas', 'oListaCorredores', 'current', 'sMsgErro'));
     }
 
@@ -61,7 +64,7 @@ class CorredorProvaController extends Controller
 
         if (count($oListaCorredores) > 0) {
             $this->sMsgErro = "Não é permitida a inscrição de menores de idade!";
-            $this->create(); 
+            return $this->create(); 
         }else{
             CorredorProva::insert([
                 [
@@ -70,7 +73,7 @@ class CorredorProvaController extends Controller
                 ],
             ]);    
 
-            $this->index();      
+            return $this->index();      
         }
     }
 

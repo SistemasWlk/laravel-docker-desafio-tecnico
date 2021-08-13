@@ -21,6 +21,7 @@
                             <th>Código</th>
                             <th>Corredor</th>
                             <th>Prova</th>
+                            <th>Data</th>
                             <!-- <th>Ações</th> -->
                         </tr>
                     </thead>
@@ -30,6 +31,7 @@
                             <td>{{$oCorredorProva->id}}</td>
                             <td>{{$oCorredorProva->nome}}</td>
                             <td>{{$oCorredorProva->quilometragem}} KM</td>
+                            <td>{{implode('/',array_reverse(explode("-",$oCorredorProva->data)))}}</td>
 <!--                             <td>
                                 <a href="" class="btn btn-sm btn-primary">Editar</a>
                                 <a href="" class="btn btn-sm btn-danger">Apagar</a>

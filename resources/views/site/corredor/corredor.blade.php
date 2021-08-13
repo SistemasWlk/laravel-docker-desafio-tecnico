@@ -33,7 +33,7 @@
                             <td>{{$oListaCorredore->nome}}</td>
                             <td>{{$oListaCorredore->cpf}}</td>
                             <td>{{$oListaCorredore->idade}}</td>
-                            <td>{{$oListaCorredore->data_nascimento}}</td>
+                            <td>{{implode('/',array_reverse(explode("-",$oListaCorredore->data_nascimento)))}}</td>
 <!--                             <td>
                                 <a href="" class="btn btn-sm btn-primary">Editar</a>
                                 <a href="" class="btn btn-sm btn-danger">Apagar</a>
