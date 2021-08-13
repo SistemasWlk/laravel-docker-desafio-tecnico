@@ -49,3 +49,17 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+## Instalação
+
+- Realizar o clone
+``git clone https://github.com/especializati/curso-php-psrs.git``
+- Entra na pasta raiz do projeto e executar o seguinte comando
+`` docker-compose up -d --build``
+
+## Acessa o Desafio
+
+Acessa um navegador e digita as seguintes url
+- http://localhost:8090/: phpMyAdmin 
+- http://localhost:8088/: Desafio Técnico 
+
