@@ -57,7 +57,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - Entra na pasta raiz do projeto e executar o seguinte comando
 `` docker-compose up -d --build``
 
-## Acessa o Desafio
+## Utilização
 
 Acessa um navegador e digita as seguintes url
 - http://localhost:8090/: phpMyAdmin 
