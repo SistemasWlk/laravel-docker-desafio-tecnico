@@ -9,6 +9,9 @@ use App\TipoProva;
 
 class TipoProvaController extends Controller
 {
+
+    private $sMsgErro = "";
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +21,8 @@ class TipoProvaController extends Controller
     {
         $current        = 'tipoprova';
         $oTipoProvas    = TipoProva::all();
-        return view('site.tipo_prova.tipo_prova', compact('oTipoProvas', 'current'));   
+        $sMsgErro       = $this->sMsgErro;
+        return view('site.tipo_prova.tipo_prova', compact('oTipoProvas', 'current', 'sMsgErro'));   
     }
 
     /**
@@ -28,7 +32,9 @@ class TipoProvaController extends Controller
      */
     public function create()
     {
-        return view('site.tipo_prova.novotipoprova', ['current' => 'tipoprova']);
+        $current  = 'tipoprova';
+        $sMsgErro = $this->sMsgErro;
+        return view('site.tipo_prova.novotipoprova', compact('current', 'sMsgErro')); 
     }
 
     /**
@@ -42,14 +48,22 @@ class TipoProvaController extends Controller
         $current         = 'tipoprova';
         $tipo_corrida    = $request->input('tipo_corrida');
 
-        TipoProva::insert([
-            [
-                'quilometragem' => $tipo_corrida
-            ],
-        ]);
+        $oValidaTipoProva = TipoProva::where('quilometragem', '=', $tipo_corrida)->get();
 
-        $oTipoProvas = TipoProva::all();
-        return view('site.tipo_prova.tipo_prova', compact('oTipoProvas', 'current'));  
+        if (count($oValidaTipoProva) > 0) {
+            $this->sMsgErro = "Tipo de prova já cadastrada!";
+            return $this->create();
+        }else{
+            TipoProva::insert([
+                [
+                    'quilometragem' => $tipo_corrida
+                ],
+            ]);
+            return $this->index();
+        }
+
+        $this->index();
+  
     }
 
     /**

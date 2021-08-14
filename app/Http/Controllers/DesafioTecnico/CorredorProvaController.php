@@ -79,7 +79,8 @@ class CorredorProvaController extends Controller
 
         foreach ($oListaProvasCorredors as $key => $oListaProvasCorredor) {
             if ($oProvaCorredor[0]->data == $oListaProvasCorredor->data) {
-                $sMsgErro = "Participante já inscrito em uma prova na data $oListaProvasCorredor->data !";
+                $data = implode('/',array_reverse(explode("-",$oListaProvasCorredor->data)));
+                $sMsgErro = "Participante já inscrito em uma prova na data $data!";
                 break;
             }
         }

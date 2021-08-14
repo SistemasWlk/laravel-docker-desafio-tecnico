@@ -27,6 +27,8 @@
     <script src="{{asset('tema/js/excanvas.min.js')}}"></script> 
     <script src="{{asset('tema/js/chart.min.js')}}" type="text/javascript"></script> 
     <script src="{{asset('tema/js/bootstrap.js')}}"></script>
+    <script src="{{asset('tema/js/jquery-1.2.6.pack.js')}}"></script>
+    <script src="{{asset('tema/js/jquery.maskedinput-1.1.4.pack.js')}}"></script>
     <script language="javascript" type="text/javascript" src="{{asset('tema/js/full-calendar/fullcalendar.min.js')}}"></script>
     <script src="{{asset('tema/js/base.js')}}"></script> 
 

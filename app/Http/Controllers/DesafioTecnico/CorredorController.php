@@ -9,6 +9,9 @@ use App\Corredor;
 
 class CorredorController extends Controller
 {
+
+    private $sMsgErro = "";
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +21,8 @@ class CorredorController extends Controller
     {
         $current            = 'corredor';
         $oListaCorredores   = Corredor::all();
-        return view('site.corredor.corredor', compact('oListaCorredores', 'current'));
+        $sMsgErro           = "";
+        return view('site.corredor.corredor', compact('oListaCorredores', 'current', 'sMsgErro' ));
     }
 
     /**
@@ -28,7 +32,9 @@ class CorredorController extends Controller
      */
     public function create()
     {
-        return view('site.corredor.novocorredor', ['current' => 'corredor']);
+        $sMsgErro = $this->sMsgErro;
+        $current  = 'corredor';
+        return view('site.corredor.novocorredor', compact('current', 'sMsgErro' ));
     }
 
     /**
@@ -39,23 +45,30 @@ class CorredorController extends Controller
      */
     public function store(Request $request)
     {
+
+        $sMsgErro        = "";
         $current         = 'corredor';
         $nome            = $request->input('nome_corredor');
-        $cpf             = $request->input('cpf_corredor');
+        $cpf             = str_replace(['.', '-'], '', $request->input('cpf_corredor'));
         $data_nascimento = $request->input('dt_nascimento_corredor');
         $idade           = $request->input('idade_corredor');
 
-        Corredor::insert([
-            [
-                'nome' => $nome, 
-                'cpf' => $cpf,
-                'data_nascimento' => $data_nascimento,
-                'idade' => $idade
-            ],
-        ]);
+        $oValidaCpfCorre = Corredor::where('cpf', '=', $cpf)->get();
 
-        $oListaCorredores = Corredor::all();
-        return view('site.corredor.corredor', compact('oListaCorredores', 'current'));
+        if (count($oValidaCpfCorre) > 0) {
+            $this->sMsgErro = "CPF já cadastrado!";
+            return $this->create();
+        }else{
+            Corredor::insert([
+                [
+                    'nome' => $nome, 
+                    'cpf' => $cpf,
+                    'data_nascimento' => $data_nascimento,
+                    'idade' => $idade
+                ],
+            ]);
+            return $this->index();
+        }
     }
 
     /**

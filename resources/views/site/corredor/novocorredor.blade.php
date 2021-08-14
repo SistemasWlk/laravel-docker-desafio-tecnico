@@ -4,48 +4,54 @@
 @include('layouts.header')
 <!-- /section -->
 <div class="section">
-  <!-- container --> 
-  <div class="container">
-      <!-- row --> 
-      <div class="row">
-        <div class="span12">          
-          <div class="widget ">
-            <div class="widget-header">
-              <h3>Cadastro de Corredor</h3>
-            </div>
-            <div class="widget-content">
-            <form action="/corredor" method="POST">
-                {!! csrf_field() !!}
-                <div class="fields">
-                    <div class="field">
-                        <label for="nome_corredor">Nome</label>
-                        <input type="text" id="nome_corredor" name="nome_corredor" value=""/>
+    <!-- container --> 
+    <div class="container">
+        <!-- row --> 
+        <div class="row">
+            <div class="span12">          
+                <div class="widget ">
+                    <div class="widget-header">
+                        <h3>Cadastro de Corredor</h3>
                     </div>
-                    <div class="field">
-                        <label for="cpf_corredor">CPF</label>
-                        <input type="text" id="cpf_corredor" name="cpf_corredor" value=""/>
+                    <div class="widget-content">
+                        @if($sMsgErro != "")
+                        <div class="alert">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{$sMsgErro}}
+                        </div>
+                        @endif
+                        <form action="/corredor" method="POST">
+                            {!! csrf_field() !!}
+                            <div class="fields">
+                                <div class="field">
+                                    <label for="nome_corredor">Nome</label>
+                                    <input type="text" id="nome_corredor" name="nome_corredor" placeholder="Nome"/>
+                                </div>
+                                <div class="field">
+                                    <label for="cpf_corredor">CPF</label>
+                                    <input type="text" id="cpf_corredor" name="cpf_corredor" placeholder="000.000.000-00"/>
+                                </div>
+                                <div class="field">
+                                    <label for="dt_nascimento_corredor">Data Nascimento</label>
+                                    <input type="date" id="dt_nascimento_corredor" name="dt_nascimento_corredor" placeholder="Data do Nascimento"/>
+                                </div>    
+                                <div class="field">
+                                    <label for="idade_corredor">Idade</label>
+                                    <input type="text" id="idade_corredor" name="idade_corredor" placeholder="Idade" readonly />
+                                </div>                                                        
+                            </div> 
+                            <br /><br />
+                            <div class="actions">                             
+                                <button type="button" class="btn btn-primary btn-sm" name="salvacorredor" id="salvacorredor">Salvar</button>
+                            </div>                              
+                        </form>
                     </div>
-                    <div class="field">
-                        <label for="dt_nascimento_corredor">Data Nascimento</label>
-                        <input type="date" id="dt_nascimento_corredor" name="dt_nascimento_corredor" value=""/>
-                    </div>    
-                    <div class="field">
-                        <label for="idade_corredor">Idade</label>
-                        <input type="text" id="idade_corredor" name="idade_corredor" value="" readonly />
-                    </div>                                                        
-                </div> 
-                <br /><br />
-                <div class="actions">                             
-                    <button type="button" class="btn btn-primary btn-sm" name="salvacorredor" id="salvacorredor">Salvar</button>
-                </div>                              
-            </form>
+                </div>
             </div>
-          </div>
-        </div>
-    </div>    
-    <!-- /row --> 
-  </div>
-  <!-- /container --> 
+        </div>    
+        <!-- /row --> 
+    </div>
+    <!-- /container --> 
 </div>
 <!-- /section -->
 @endsection
@@ -53,15 +59,19 @@
 @section('javascript')
 <script>
 
+    $(document).ready(function(){
+        $("#cpf_corredor").mask("999.999.999-99");
+    });
+
     $( "#dt_nascimento_corredor" ).blur(function() {
-        var dataAtual = new Date();
-        var anoAtual = dataAtual.getFullYear();
+        var dataAtual    = new Date();
+        var anoAtual     = dataAtual.getFullYear();
         var anoNascParts = this.value.split('-');
-        var diaNasc =anoNascParts[2];
-        var mesNasc =anoNascParts[1];
-        var anoNasc =anoNascParts[0];
-        var idade = anoAtual - anoNasc;
-        var mesAtual = dataAtual.getMonth() + 1; 
+        var diaNasc      = anoNascParts[2];
+        var mesNasc      = anoNascParts[1];
+        var anoNasc      = anoNascParts[0];
+        var idade        = anoAtual - anoNasc;
+        var mesAtual     = dataAtual.getMonth() + 1; 
         //Se mes atual for menor que o nascimento, nao fez aniversario ainda;  
         if(mesAtual < mesNasc){
             idade--; 

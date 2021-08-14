@@ -10,6 +10,9 @@ use App\TipoProva;
 
 class ProvaController extends Controller
 {
+
+    private $sMsgErro = "";
+
     /**
      * Display a listing of the resource.
      *
@@ -17,12 +20,13 @@ class ProvaController extends Controller
      */
     public function index()
     {
-        $current = 'prova';
-        $oProvas = Prova::select('provas.*', 'quilometragem')
+        $sMsgErro = $this->sMsgErro;
+        $current  = 'prova';
+        $oProvas  = Prova::select('provas.*', 'quilometragem')
             ->join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')
             ->orderby('provas.id')
             ->get();
-        return view('site.prova.prova', compact('oProvas', 'current'));
+        return view('site.prova.prova', compact('oProvas', 'current', 'sMsgErro'));
         //return view('site.prova.prova', ['current' => 'prova']);
     }
 
@@ -33,10 +37,10 @@ class ProvaController extends Controller
      */
     public function create()
     {
-
+        $sMsgErro    = $this->sMsgErro;
         $current     = 'prova';
         $oTipoProvas = TipoProva::all();
-        return view('site.prova.novoprova', compact('oTipoProvas', 'current'));
+        return view('site.prova.novoprova', compact('oTipoProvas', 'current', 'sMsgErro'));
     }
 
     /**
@@ -51,14 +55,26 @@ class ProvaController extends Controller
         $tipo_prova  = $request->input('tipo_prova');
         $dt_prova    = $request->input('dt_prova');
 
-        Prova::insert([
-            [
-                'id_tp_prova' => $tipo_prova,
-                'data' => $dt_prova
-            ],
-        ]);
+        $oValidaProva = Prova::where('id_tp_prova', '=', $tipo_prova)
+            ->where('data', '=', $dt_prova)
+            ->get();
 
-        return $this->index();
+        if (count($oValidaProva) > 0) {
+            $this->sMsgErro = "Prova já cadastrada para essa data!";
+            return $this->create();
+        }elseif($dt_prova < date('Y-m-d')){
+            $this->sMsgErro = "Data invalida. Data da prova tem que ser maior que a data atual!";
+            return $this->create();
+        }else{
+            Prova::insert([
+                [
+                    'id_tp_prova' => $tipo_prova,
+                    'data' => $dt_prova
+                ],
+            ]);
+            return $this->index();
+        }
+
     }
 
     /**

@@ -102,6 +102,13 @@ mix.js([
     'resources/tema/js/full-calendar/fullcalendar.min.js'
 ], 'public/tema/js/full-calendar/fullcalendar.min.js');
 
+mix.js([
+    'resources/tema/js/jquery-1.2.6.pack.js'
+], 'public/tema/js/jquery-1.2.6.pack.js');
+
+mix.js([
+    'resources/tema/js/jquery.maskedinput-1.1.4.pack.js'
+], 'public/tema/js/jquery.maskedinput-1.1.4.pack.js');
 
 
 

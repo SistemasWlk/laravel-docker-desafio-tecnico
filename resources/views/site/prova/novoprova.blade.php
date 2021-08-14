@@ -14,6 +14,12 @@
                         <h3>Cadastro Prova</h3>
                     </div>
                     <div class="widget-content">
+                        @if($sMsgErro != "")
+                        <div class="alert">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{$sMsgErro}}
+                        </div>
+                        @endif
                         <form action="/prova" method="POST">
                             {!! csrf_field() !!}
                             <div class="fields">
