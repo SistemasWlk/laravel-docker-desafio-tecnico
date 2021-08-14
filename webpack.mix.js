@@ -99,10 +99,6 @@ mix.js([
 ], 'public/tema/js/signin.js');
 
 mix.js([
-    'resources/tema/js/full-calendar/fullcalendar.min.js'
-], 'public/tema/js/full-calendar/fullcalendar.min.js');
-
-mix.js([
     'resources/tema/js/jquery-1.2.6.pack.js'
 ], 'public/tema/js/jquery-1.2.6.pack.js');
 
@@ -110,5 +106,50 @@ mix.js([
     'resources/tema/js/jquery.maskedinput-1.1.4.pack.js'
 ], 'public/tema/js/jquery.maskedinput-1.1.4.pack.js');
 
+//-----------------charts-------------
+
+mix.js([
+    'resources/tema/js/charts/area.js'
+], 'public/tema/js/charts/area.js');
+
+mix.js([
+    'resources/tema/js/charts/bar.js'
+], 'public/tema/js/charts/bar.js');
+
+mix.js([
+    'resources/tema/js/charts/donut.js'
+], 'public/tema/js/charts/donut.js');
+
+mix.js([
+    'resources/tema/js/charts/line.js'
+], 'public/tema/js/charts/line.js');
+
+mix.js([
+    'resources/tema/js/charts/pie.js'
+], 'public/tema/js/charts/pie.js');
+
+//-----------------full-calendar-------------
+
+mix.js([
+    'resources/tema/js/full-calendar/fullcalendar.min.js'
+], 'public/tema/js/full-calendar/fullcalendar.min.js');
+
+mix.styles([
+    'resources/tema/js/full-calendar/fullcalendar.css'
+], 'public/tema/js/full-calendar/fullcalendar.css');
+
+//-----------------full-calendar-------------
+
+// mix.img([
+//     'resources/tema/js/guidely/guidely-number.png'
+// ], 'public/tema/js/guidely/guidely-number.png');
+
+mix.js([
+    'resources/tema/js/guidely/guidely.min.js'
+], 'public/tema/js/guidely/guidely.min.js');
+
+mix.styles([
+    'resources/tema/js/guidely/guidely.css'
+], 'public/tema/js/guidely/guidely.css');
 
 

@@ -14,41 +14,41 @@
 </div>
 <!-- /navbar -->
 <div class="subnavbar">
-    <div class="subnavbar-inner">
+    <div class="subnavbar-inner" style="height: 40px;">
         <div class="container">
             <ul class="mainnav">
-                <li @if($current=="home") class="active" @else class="" @endif>
+                <li @if($current=="home") class="active" @else class="" @endif style="height: 40px;">
                     <a href="/">
-                        <i class="icon-dashboard"></i><span>Dashboard</span> 
+                        <span style="padding-top: 10px">Dashboard</span>
                     </a> 
                 </li>
-                <li @if($current=="tipoprova") class="active" @else class="" @endif>
+                <li @if($current=="tipoprova") class="active" @else class="" @endif style="height: 40px;">
                     <a href="/tipoprova">
-                        <i class="icon-dashboard"></i><span>Tipo Prova</span> 
+                        <span style="padding-top: 10px">Tipo Prova</span>
                     </a> 
                 </li>
-                <li @if($current=="corredor") class="active" @else class="" @endif>
+                <li @if($current=="corredor") class="active" @else class="" @endif style="height: 40px;">
                     <a href="/corredor">
-                        <i class="icon-dashboard"></i><span>Corredor&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span style="padding-top: 10px">Corredor&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     </a> 
                 </li>
-                <li @if($current=="prova") class="active" @else class="" @endif>
+                <li @if($current=="prova") class="active" @else class="" @endif style="height: 40px;">
                     <a href="/prova">
-                        <i class="icon-dashboard"></i><span>Prova&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span style="padding-top: 10px">Prova&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     </a> 
                 </li>
-                <li @if($current=="corrida") class="active" @else class="" @endif>
+                <li @if($current=="corrida") class="active" @else class="" @endif style="height: 40px;">
                     <a href="/corredorprova">
-                        <i class="icon-dashboard"></i><span>Corrida&nbsp;&nbsp;&nbsp;</span> 
+                        <span style="padding-top: 10px">Corrida&nbsp;&nbsp;&nbsp;</span>
                     </a> 
                 </li>
-                <li @if($current == "resultadocorrida") class="active" @else class="" @endif>
+                <li @if($current == "resultadocorrida") class="active" @else class="" @endif style="height: 40px;">
                     <a href="/resultadocorredor">
-                        <i class="icon-dashboard"></i><span>Resultada Corrida</span> 
+                        <span style="padding-top: 10px">Resultada Corrida</span>
                     </a> 
                 </li>    
-                <li>
-                    <a href=""><i></i><span></span> 
+                <li style="height: 40px;">
+                    <a href="" ><span style="padding-top: 10px"></span> 
                     </a> 
                 </li>
             </ul>

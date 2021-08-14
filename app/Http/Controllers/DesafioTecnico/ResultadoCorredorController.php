@@ -63,7 +63,6 @@ class ResultadoCorredorController extends Controller
         $sMsgErro = $this->sMsgErro;
             
         return view('site.resultado_corredor.resultado_corredor', compact('oResultadoCorredors', 'current', 'sOrderBy', 'sMsgErro'));
-        // return view('site.resultado_corredor.resultado_corredor', ['current' => 'resultadocorrida']);
     }
 
     /**
@@ -90,7 +89,6 @@ class ResultadoCorredorController extends Controller
             ->where('corredors.id', '=', $oListaCorredores[0]->id)
             ->get();
 
-        // $oListaProvas       = Prova::join('tipo_provas', 'provas.id_tp_prova', '=', 'tipo_provas.id')->get();
         return view('site.resultado_corredor.novoresultadocorredor', compact('oListaProvas', 'oListaCorredores', 'current', 'sMsgErro'));
     }
 

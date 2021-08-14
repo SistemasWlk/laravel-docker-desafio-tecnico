@@ -6,9 +6,15 @@
     "/tema/js/faq.js": "/tema/js/faq.js",
     "/tema/js/jquery-1.7.2.min.js": "/tema/js/jquery-1.7.2.min.js",
     "/tema/js/signin.js": "/tema/js/signin.js",
-    "/tema/js/full-calendar/fullcalendar.min.js": "/tema/js/full-calendar/fullcalendar.min.js",
     "/tema/js/jquery-1.2.6.pack.js": "/tema/js/jquery-1.2.6.pack.js",
     "/tema/js/jquery.maskedinput-1.1.4.pack.js": "/tema/js/jquery.maskedinput-1.1.4.pack.js",
+    "/tema/js/charts/area.js": "/tema/js/charts/area.js",
+    "/tema/js/charts/bar.js": "/tema/js/charts/bar.js",
+    "/tema/js/charts/donut.js": "/tema/js/charts/donut.js",
+    "/tema/js/charts/line.js": "/tema/js/charts/line.js",
+    "/tema/js/charts/pie.js": "/tema/js/charts/pie.js",
+    "/tema/js/full-calendar/fullcalendar.min.js": "/tema/js/full-calendar/fullcalendar.min.js",
+    "/tema/js/guidely/guidely.min.js": "/tema/js/guidely/guidely.min.js",
     "/tema/css/base-admin-responsive.css": "/tema/css/base-admin-responsive.css",
     "/tema/css/bootstrap.css": "/tema/css/bootstrap.css",
     "/tema/css/bootstrap.min.css": "/tema/css/bootstrap.min.css",
@@ -22,5 +28,7 @@
     "/tema/css/pages/faq.css": "/tema/css/pages/faq.css",
     "/tema/css/pages/plans.css": "/tema/css/pages/plans.css",
     "/tema/css/pages/reports.css": "/tema/css/pages/reports.css",
-    "/tema/css/pages/signin.css": "/tema/css/pages/signin.css"
+    "/tema/css/pages/signin.css": "/tema/css/pages/signin.css",
+    "/tema/js/full-calendar/fullcalendar.css": "/tema/js/full-calendar/fullcalendar.css",
+    "/tema/js/guidely/guidely.css": "/tema/js/guidely/guidely.css"
 }

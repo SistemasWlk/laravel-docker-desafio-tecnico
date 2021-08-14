@@ -27,7 +27,6 @@ class ProvaController extends Controller
             ->orderby('provas.id')
             ->get();
         return view('site.prova.prova', compact('oProvas', 'current', 'sMsgErro'));
-        //return view('site.prova.prova', ['current' => 'prova']);
     }
 
     /**
