@@ -8,6 +8,12 @@ RUN apt-get update && apt-get upgrade -y \
 
 WORKDIR /var/www/html/laravel-docker-desafio-tecnico/
 COPY . /var/www/html/laravel-docker-desafio-tecnico/
-RUN chmod -R 777 /var/www/html/laravel-docker-desafio-tecnico/storage/*
 ADD docker/apache2/000-default.conf /etc/apache2/sites-available/000-default.conf
 ADD docker/config/package.json /var/www/html/laravel-docker-desafio-tecnico/package.json
+ADD docker/config/.env /var/www/html/laravel-docker-desafio-tecnico/
+ADD docker/config/apache2/php.ini /etc/php/7.4/apache2/php.ini
+ADD docker/config/apache2/php.ini /etc/php/7.4/php/php.ini
+RUN www-data.www-data /var/www/html/laravel-docker-desafio-tecnico -R
+RUN chmod -R 775 /var/www/html/laravel-docker-desafio-tecnico
+RUN chmod -R 777 /var/www/html/laravel-docker-desafio-tecnico/storage
+
