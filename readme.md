@@ -10,7 +10,7 @@
 ## Instalação
 
 - Realizar o clone
-  - git clone https://github.com/especializati/curso-php-psrs.git
+  - git clone https://github.com/SistemasWlk/laravel-docker-desafio-tecnico.git
 - Entra na pasta raiz do projeto e executar o seguinte comando
   - docker-compose up -d --build
 
