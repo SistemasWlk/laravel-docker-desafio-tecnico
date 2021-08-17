@@ -10,9 +10,48 @@
 ## Instalação
 
 - Realizar o clone
-  - git clone https://github.com/SistemasWlk/laravel-docker-desafio-tecnico.git
+
+```
+root@577187a1bdd4# git clone https://github.com/SistemasWlk/laravel-docker-desafio-tecnico.git 
+```
+
+- Acesse o branch master
+
+```
+root@577187a1bdd4# git checkout master 
+```
+
 - Entra na pasta raiz do projeto e executar o seguinte comando
-  - docker-compose up -d --build
+
+```
+root@577187a1bdd4# docker-compose up -d --build
+```
+
+- Logo em seguida no direóro raiz do projeto execute o compser install
+
+```
+root@577187a1bdd4# composer install
+```
+
+- Altere a permissão da pasta storage/
+
+```
+root@577187a1bdd4# chmod 777 storage/ -R
+```
+
+- Execute os comando logo abaixo na pasta raiz
+
+```
+root@577187a1bdd4# php artisan key:generate
+root@577187a1bdd4# php artisan config:clear
+root@577187a1bdd4# php artisan config:cache
+```
+
+- Crie o arquivo de conviguração .env
+
+```
+root@577187a1bdd4# cp -v .envexemplo .env
+```
 
 ## Utilização
 
