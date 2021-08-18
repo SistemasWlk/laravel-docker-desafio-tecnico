@@ -59,7 +59,7 @@ root@577187a1bdd4# php artisan config:clear
 root@577187a1bdd4# php artisan config:cache
 ```
 
-## Utilização
+## Endereço de Acesso
 
 Acessa um navegador e digita as seguintes url
 - http://localhost:8090/: phpMyAdmin 
