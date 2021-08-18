@@ -39,18 +39,18 @@ root@577187a1bdd4# composer install
 root@577187a1bdd4# chmod 777 storage/ -R
 ```
 
+- Crie o arquivo de conviguração .env
+
+```
+root@577187a1bdd4# cp -v .envexemplo .env
+```
+
 - Execute os comando logo abaixo na pasta raiz
 
 ```
 root@577187a1bdd4# php artisan key:generate
 root@577187a1bdd4# php artisan config:clear
 root@577187a1bdd4# php artisan config:cache
-```
-
-- Crie o arquivo de conviguração .env
-
-```
-root@577187a1bdd4# cp -v .envexemplo .env
 ```
 
 ## Utilização
