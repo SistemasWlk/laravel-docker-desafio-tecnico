@@ -107,7 +107,7 @@ class ResultadoCorredorController extends Controller
         $horario_fim = $request->input('horario_fim').":".$request->input('seg_fim');
         $tempo       = $this->diffTime($horario_ini, $horario_fim);
 
-        $oValidarResultadoProvas = CorredorProva::select('*')
+        $oValidarResultadoProvas = ResultadoCorredor::select('*')
             ->where('id_prova',     '=', $id_prova)
             ->where('id_corredor',  '=', $id_corredor)
             ->get();
